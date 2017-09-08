@@ -1,0 +1,26 @@
+﻿@using Beemonitor.Models
+@model IEnumerable<Beemonitor.Models.Apiary>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Apiary</th>
+            <th>Postcode</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var apiary in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(apiary.Name, "Details", "Apiaries", new {id = apiary.Id}, null)</td>
+            <td>@apiary.Postcode</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -168,18 +168,44 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiariesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709081338233_InitialModel.cs" />
+    <Compile Include="Migrations\201709081338233_InitialModel.Designer.cs">
+      <DependentUpon>201709081338233_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709081351103_addPostcodeToCustomer.cs" />
+    <Compile Include="Migrations\201709081351103_addPostcodeToCustomer.Designer.cs">
+      <DependentUpon>201709081351103_addPostcodeToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709081358428_AddBeehive.cs" />
+    <Compile Include="Migrations\201709081358428_AddBeehive.Designer.cs">
+      <DependentUpon>201709081358428_AddBeehive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709081411492_PopulateApiaryBeehives1.cs" />
+    <Compile Include="Migrations\201709081411492_PopulateApiaryBeehives1.Designer.cs">
+      <DependentUpon>201709081411492_PopulateApiaryBeehives1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709081521096_ApplyAnnotations.cs" />
+    <Compile Include="Migrations\201709081521096_ApplyAnnotations.Designer.cs">
+      <DependentUpon>201709081521096_ApplyAnnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Apiary.cs" />
+    <Compile Include="Models\Beehive.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ApiaryBeehivesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -234,6 +260,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Apiaries\Random.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Apiary\Details.cshtml" />
+    <Content Include="Views\Apiaries\Index.cshtml" />
+    <Content Include="Views\Apiaries\Details.cshtml" />
+    <Content Include="Views\Apiaries\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +277,23 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709081338233_InitialModel.resx">
+      <DependentUpon>201709081338233_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081351103_addPostcodeToCustomer.resx">
+      <DependentUpon>201709081351103_addPostcodeToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081358428_AddBeehive.resx">
+      <DependentUpon>201709081358428_AddBeehive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081411492_PopulateApiaryBeehives1.resx">
+      <DependentUpon>201709081411492_PopulateApiaryBeehives1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081521096_ApplyAnnotations.resx">
+      <DependentUpon>201709081521096_ApplyAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

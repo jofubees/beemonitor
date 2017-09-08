@@ -20,6 +20,9 @@ namespace Beemonitor.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Apiary> Apiaries { get; set; }
+        public DbSet<Beehive> Beehives { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
