@@ -5,22 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-<table class="table table-bordered table-hover">
-    <thead>
+<h2>Your Apiaries</h2>
+@if (!Model.Any())
+{
+    <p> you have no Apiaries set up</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
         <tr>
             <th>Apiary</th>
             <th>Postcode</th>
+            <th>Click below to Edit</th>
         </tr>
-    </thead>
+        </thead>
 
-    <tbody>
-    @foreach (var apiary in Model)
-    {
-        <tr>
-            <td>@Html.ActionLink(apiary.Name, "Details", "Apiaries", new {id = apiary.Id}, null)</td>
-            <td>@apiary.Postcode</td>
-        </tr>
-    }
-    </tbody>
-</table>
+        <tbody>
+        @foreach (var apiary in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(apiary.Name, "Details", "Apiaries", new {id = apiary.Id}, null)</td>
+                <td>@apiary.Postcode</td>
+                <td>@Html.ActionLink(apiary.Name, "Edit", "Apiaries", new { id = apiary.Id }, null)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}
+
+

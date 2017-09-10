@@ -265,7 +265,7 @@
     <Content Include="Views\Apiary\Details.cshtml" />
     <Content Include="Views\Apiaries\Index.cshtml" />
     <Content Include="Views\Apiaries\Details.cshtml" />
-    <Content Include="Views\Apiaries\New.cshtml" />
+    <Content Include="Views\Apiaries\ApiaryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

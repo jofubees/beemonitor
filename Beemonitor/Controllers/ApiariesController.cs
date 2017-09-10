@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Beemonitor.Models;
 using Beemonitor.ViewModels;
+using Microsoft.Owin.Security.Provider;
 
 namespace Beemonitor.Controllers
 {
@@ -25,9 +26,24 @@ namespace Beemonitor.Controllers
 
         public ActionResult New()
         {
-            return View();
+            return View("ApiaryForm");
         }
 
+        [HttpPost]
+        public ActionResult Save(Apiary apiary)
+        {
+            if (apiary.Id == 0)
+                _context.Apiaries.Add(apiary);
+            else
+            {
+                var apiaryInDB = _context.Apiaries.Single(c => c.Id == apiary.Id);
+                apiaryInDB.Name = apiary.Name;
+                apiaryInDB.Postcode = apiary.Postcode;
+            }
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index", "Apiaries");
+        }
         public ViewResult Index()
         {
             var apiaries = _context.Apiaries;
@@ -42,28 +58,12 @@ namespace Beemonitor.Controllers
             return View(apiary);
         }
 
-        private IEnumerable<Apiary> getApiaries()
+        public ActionResult Edit(int id)
         {
-            return new List<Apiary>
-            {
-                new Apiary {Id = 1, Name = "garden"},
-                new Apiary {Id = 2, Name = "Appletree"}
-            };
+            var apiary = _context.Apiaries.SingleOrDefault(c => c.Id == id);
+            if (apiary == null) return HttpNotFound();
+            // otherwise call the Apiary form view with the apiary object just found from the selected id
+            return View("ApiaryForm", apiary);
         }
-
     }
-/*    var apiary = new Apiary() { Name = "garden" };
-    var beehives = new List<Beehive>
-    {
-    new Beehive {Name = "Flower"},
-    new Beehive {Name = "Cedar"}
-    };
-    var viewModel
-    = new ApiaryBeehivesViewModel
-    {
-    Apiary = apiary,
-    Beehive = beehives
-    };
-    return View(viewModel);
-*/
 }
