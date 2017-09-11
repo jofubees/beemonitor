@@ -34,6 +34,7 @@ namespace Beemonitor.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Apiary apiary)
         {
             if (!ModelState.IsValid)
