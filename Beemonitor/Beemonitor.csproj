@@ -203,6 +203,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ApiaryBeehivesViewModel.cs" />
+    <Compile Include="ViewModels\ApiaryFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen.css" />
@@ -266,6 +267,7 @@
     <Content Include="Views\Apiaries\Index.cshtml" />
     <Content Include="Views\Apiaries\Details.cshtml" />
     <Content Include="Views\Apiaries\ApiaryForm.cshtml" />
+    <Content Include="Views\Apiaries\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

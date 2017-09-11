@@ -26,19 +26,28 @@ namespace Beemonitor.Controllers
 
         public ActionResult New()
         {
-            return View("ApiaryForm");
+            var viewModel = new ApiaryFormViewModel()
+            {
+                Id = 0
+            };
+            return View("ApiaryForm", viewModel);
         }
 
         [HttpPost]
         public ActionResult Save(Apiary apiary)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new ApiaryFormViewModel(apiary);
+                return View("ApiaryForm", viewModel);
+            }
             if (apiary.Id == 0)
                 _context.Apiaries.Add(apiary);
             else
             {
-                var apiaryInDB = _context.Apiaries.Single(c => c.Id == apiary.Id);
-                apiaryInDB.Name = apiary.Name;
-                apiaryInDB.Postcode = apiary.Postcode;
+                var apiaryInDB = _context.Apiaries.Single(c => c.Id == apiary.Id); //retrieve db version of database
+                apiaryInDB.Name = apiary.Name;          // and update the name
+                apiaryInDB.Postcode = apiary.Postcode;  // and postcode  - nb not using tryupdatemodel as a general security risk
             }
             _context.SaveChanges();
             
@@ -62,8 +71,9 @@ namespace Beemonitor.Controllers
         {
             var apiary = _context.Apiaries.SingleOrDefault(c => c.Id == id);
             if (apiary == null) return HttpNotFound();
-            // otherwise call the Apiary form view with the apiary object just found from the selected id
-            return View("ApiaryForm", apiary);
+            // otherwise build the formview (with our current apiary) and call the Apiary form 
+            var viewModel = new ApiaryFormViewModel(apiary);
+            return View("ApiaryForm", viewModel);
         }
     }
 }
