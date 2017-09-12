@@ -186,6 +186,8 @@
     <Compile Include="Controllers\Api\ObservationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dtos\ApiaryBeehivesDto.cs" />
+    <Compile Include="Dtos\NewApiaryBeehiveDto.cs" />
     <Compile Include="Dtos\ObservationDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

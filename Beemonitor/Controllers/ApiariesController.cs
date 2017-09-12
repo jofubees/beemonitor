@@ -9,6 +9,7 @@ using Microsoft.Owin.Security.Provider;
 
 namespace Beemonitor.Controllers
 {
+    [Authorize]
     public class ApiariesController : Controller
     {
         // GET: Apiaries

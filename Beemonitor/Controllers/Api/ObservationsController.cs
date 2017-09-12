@@ -23,21 +23,27 @@ namespace Beemonitor.Controllers.Api
             return _context.Observations.ToList();
         }
         //get  /api/observations/1
-        public IEnumerable<Observation> GetObservations(string HiveId)
+        public Observation GetObservations(int Id)
         {
-            return _context.Observations.ToList();
+            var observation = _context.Observations.SingleOrDefault(c => c.Id == Id);
+
+            if (observation == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return observation;
         }
         //Post  /api/observations
         [HttpPost]
-        public Observation CreateObservation(Observation observation)
+        public IHttpActionResult CreateObservation(Observation observation)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             _context.Observations.Add(observation);
             _context.SaveChanges();
 
-            return observation;
+            // return the uri linking to the created record  i.e. "/api/obs/1"
+            return Created(new Uri(Request.RequestUri + "/" + observation.Id), observation);
         }
 
 
