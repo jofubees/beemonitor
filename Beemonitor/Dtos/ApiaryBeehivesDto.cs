@@ -8,8 +8,7 @@ namespace Beemonitor.Dtos
 {
     public class ApiaryBeehivesDto
     {
-        public int ApiaryId { get; set; }
-        public string ApiaryName { get; set; }
-        public List<Beehive> Beehive { get; set; }
+        public IEnumerable<Apiary> Apiaries { get; set; }
+        public IEnumerable<Beehive> Beehives { get; set; }
     }
 }

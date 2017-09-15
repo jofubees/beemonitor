@@ -27,7 +27,7 @@ else
             <tr>
                 <td>@Html.ActionLink(apiary.Name, "Details", "Apiaries", new {id = apiary.Id}, null)</td>
                 <td>@apiary.Postcode</td>
-                <td>@Html.ActionLink(apiary.Name, "Edit", "Apiaries", new { id = apiary.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Apiaries", new { id = apiary.Id }, null)</td>
             </tr>
         }
         </tbody>

@@ -14,5 +14,8 @@ namespace Beemonitor.Models
         public string Name { get; set; }
         [StringLength(10)]
         public string Postcode { get; set; }
+
+        public virtual ICollection<Beehive> Beehives { get; set; }
+
     }
 }

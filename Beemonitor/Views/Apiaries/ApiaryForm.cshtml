@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Apiary</h2>
+<h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Apiaries"))
 {

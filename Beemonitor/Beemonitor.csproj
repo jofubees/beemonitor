@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ApiariesController.cs" />
     <Compile Include="Controllers\Api\ApiariesController.cs" />
     <Compile Include="Controllers\Api\ObservationsController.cs" />
+    <Compile Include="Controllers\BeehivesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\ApiaryBeehivesDto.cs" />
@@ -216,6 +217,14 @@
     <Compile Include="Migrations\201709112227268_observation.Designer.cs">
       <DependentUpon>201709112227268_observation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709141005072_apihive.cs" />
+    <Compile Include="Migrations\201709141005072_apihive.Designer.cs">
+      <DependentUpon>201709141005072_apihive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709151736188_linkasvirtual.cs" />
+    <Compile Include="Migrations\201709151736188_linkasvirtual.Designer.cs">
+      <DependentUpon>201709151736188_linkasvirtual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apiary.cs" />
@@ -225,8 +234,9 @@
     <Compile Include="Models\Observation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ApiaryBeehivesViewModel.cs" />
+    <Compile Include="ViewModels\ApiaryDetailsViewModel.cs" />
     <Compile Include="ViewModels\ApiaryFormViewModel.cs" />
+    <Compile Include="ViewModels\BeehiveFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen.css" />
@@ -286,7 +296,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Apiaries\Random.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
-    <Content Include="Views\Apiary\Details.cshtml" />
     <Content Include="Views\Apiaries\Index.cshtml" />
     <Content Include="Views\Apiaries\Details.cshtml" />
     <Content Include="Views\Apiaries\ApiaryForm.cshtml" />
@@ -294,6 +303,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Apiary\" />
+    <Folder Include="Views\Beehives\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -321,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709112227268_observation.resx">
       <DependentUpon>201709112227268_observation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709141005072_apihive.resx">
+      <DependentUpon>201709141005072_apihive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709151736188_linkasvirtual.resx">
+      <DependentUpon>201709151736188_linkasvirtual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
