@@ -6,6 +6,10 @@
 }
 
 <h2>Your Apiaries</h2>
+
+<td>@Html.ActionLink("Create New Apiary", "New", "Apiaries")</td>
+
+
 @if (!Model.Any())
 {
     <p> you have no Apiaries set up</p>
@@ -25,7 +29,7 @@ else
         @foreach (var apiary in Model)
         {
             <tr>
-                <td>@Html.ActionLink(apiary.Name, "Details", "Apiaries", new {id = apiary.Id}, null)</td>
+                <td>@Html.ActionLink(apiary.Name, "Index", "Beehives", new {id = apiary.Id}, null)</td>
                 <td>@apiary.Postcode</td>
                 <td>@Html.ActionLink("Edit", "Edit", "Apiaries", new { id = apiary.Id }, null)</td>
             </tr>

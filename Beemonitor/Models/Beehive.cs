@@ -13,6 +13,10 @@ namespace Beemonitor.Models
         [StringLength(255)]
         public string Name { get; set; }
 
-        public virtual Apiary Apiary { get; set; }
+        public int ApiaryId { get; set; }
+
+        public ICollection<Sensor> Sensors { get; set; }
+
+        //        public virtual Apiary Apiary { get; set; }
     }
 }

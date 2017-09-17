@@ -1,0 +1,34 @@
+﻿@model Beemonitor.ViewModels.BeehiveFormViewModel
+
+
+
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title  beehive </h2>
+
+@using (Html.BeginForm("Save", "Beehives"))
+{
+    @Html.ValidationSummary(true, "please fix the following errors...")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div>
+        @Html.TextAreaFor(m=> m.ApiaryId)
+    </div>
+
+ 
+    @Html.HiddenFor(m => m.ApiaryId)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

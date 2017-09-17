@@ -22,12 +22,35 @@ namespace Beemonitor.Controllers
             _context.Dispose();
         }
 
-        public ActionResult New()
+        public ActionResult New(int? Id)  // parameter is the owning apiary
         {
-            var viewModel = new BeehiveFormViewModel() //creating an empty ApiaryFormViewModel
+            int fred =0;
+
+            if (Id != null)
             {
-                Id = 0
+                fred = (int) Id;
+            }
+            if (fred ==0)
+                return HttpNotFound();  // something has gone wrong if we get  here
+
+            Apiary apiary = _context.Apiaries.Find(fred);
+
+            var viewModel = new BeehiveFormViewModel() //creating an fresh BeehiveFormViewModel
+            {
+                Id = 0,
+                Name = " ",
+                ApiaryId = apiary.Id
             };
+
+            return View("BeehiveForm", viewModel);
+        }
+
+        public ActionResult Edit(int id)    //parameter is the existing beehive.
+        {
+            var beehive = _context.Beehives.SingleOrDefault(c => c.Id == id);  //find the beehive that matches the id parameter
+            if (beehive == null) return HttpNotFound();
+            // otherwise build the formview (with our current beehive) and call the beehive form 
+            var viewModel = new BeehiveFormViewModel(beehive);
             return View("BeehiveForm", viewModel);
         }
 
@@ -37,9 +60,10 @@ namespace Beemonitor.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new BeehiveFormViewModel(beehive);  //creating an apiaryformviewModel object using apiary parameter
+                var viewModel = new BeehiveFormViewModel(beehive);  //creating an BeehiveformviewModel object using beehive parameter
                 return View("BeehiveForm", viewModel);
             }
+
             if (beehive.Id == 0)
                 _context.Beehives.Add(beehive);
             else
@@ -51,20 +75,19 @@ namespace Beemonitor.Controllers
 
             return RedirectToAction("Index", "Beehives");   //and return to the index list of apiaries
         }
-        public ViewResult Index()
+        public ActionResult Index(int? id)
         {
-            var beehives = _context.Beehives;             // set up to retrieve all apiaries in database
-            return View(beehives);                        // and pass that list of apiaries to the view
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Apiaries") ;   //if no parameter provided, return to index
+            }
+            var apiary = _context.Apiaries.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
+            if (apiary == null)
+                return HttpNotFound();
+            var viewModel = new ApiaryDetailsViewModel(apiary);    //create the viewmodel object for the found apiary object
+            return View(viewModel);
         }
 
-        public ActionResult Edit(int id)
-        {
-            var beehive = _context.Beehives.SingleOrDefault(c => c.Id == id);  //find the beehive that matches the id parameter
-            if (beehive == null) return HttpNotFound();
-            // otherwise build the formview (with our current beehive) and call the beehive form 
-            var viewModel = new BeehiveFormViewModel(beehive);
-            return View("BeehiveForm", viewModel);
-        }
 
         public ActionResult Details(int? id)
         {
@@ -75,8 +98,8 @@ namespace Beemonitor.Controllers
             var beehive = _context.Beehives.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
             if (beehive == null)
                 return HttpNotFound();
-            //            var viewModel = new BeehiveDetailsViewModel(beehive);    //create the viewmodel object for the found apiary object
-            var viewModel = new ApiaryDetailsViewModel();
+            //var viewModel = new BeehiveDetailsViewModel(beehive);    //create the viewmodel object for the found apiary object
+            var viewModel = _context.Beehives;
 
             return View(viewModel);
         }

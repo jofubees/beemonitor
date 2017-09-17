@@ -23,6 +23,8 @@ namespace Beemonitor.Models
         public DbSet<Apiary> Apiaries { get; set; }
         public DbSet<Beehive> Beehives { get; set; }
         public DbSet<Observation> Observations { get; set; }
+        public DbSet<Sensor> Sensors{ get; set; }
+        public DbSet<SensorType> SensorTypes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

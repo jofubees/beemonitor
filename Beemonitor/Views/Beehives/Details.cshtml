@@ -1,0 +1,39 @@
+﻿@using Beemonitor.Models
+@Model BeeMonitor.Models.BeehiveDataViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Beehive.Name</h2>
+
+@if (Model.Sensors == null)
+{
+    <p> this Beehive has no sensors set up</p>
+}
+else
+{
+
+    <div class="display-field">
+        <table>
+            @foreach (Sensor sensor in Model.Sensors)
+            {
+                <tr>
+                    <th>Sensor Name</th>
+                    <th>@sensor.SensorName</th>
+                </tr>
+                foreach (Observation Observation in Model.Observations)
+                 {
+                     <tr>
+                         <td>value</td>
+                         <td>@Observation.ObsValue</td>
+                         <td>date time</td>
+                         <td>@Observation.ObsDateTime</td>
+                     </tr>
+                 }
+            }
+        </table>
+    </div>
+
+
+}

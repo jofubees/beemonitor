@@ -1,0 +1,35 @@
+﻿@using Beemonitor.Models
+@Model BeeMonitor.Models.ApiaryFormViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listing of Beehives at @Model.Name @Model.Postcode</h2>
+
+
+<td>@Html.ActionLink("Create New Beehive", "New", "Beehives", new { id = @Model.Id }, null)</td>
+
+@if (Model.Beehives == null)
+{
+    <p> this Apiary has no Beehives set up</p>
+}
+else
+{
+
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Beehive Name</th>
+            </tr>
+            @foreach (Beehive beehive in Model.Beehives)
+            {
+                <tr>
+                    <td>@Html.ActionLink(beehive.Name, "Details", "Beehives", new {id = beehive.Id}, null)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Beehives", new { id = beehive.Id }, null)</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <td>@Html.ActionLink("Back to Apiaries", "Index", "Apiaries")</td>
+}

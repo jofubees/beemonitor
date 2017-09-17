@@ -12,11 +12,16 @@ namespace Beemonitor.ViewModels
 
         public string Name { get; set; }
 
+        public int ApiaryId;
+
         public string Title
         {
             get
             {
-                return Id != 0 ? "Edit Beehive" : "New Beehive";
+                if (Id == 0 )
+                    return "New Beehive";
+                else
+                    return "Edit Beehive";
             }
         }
         public BeehiveFormViewModel()
@@ -28,6 +33,7 @@ namespace Beemonitor.ViewModels
         {
             Id = beehive.Id;
             Name = beehive.Name;
+            ApiaryId = beehive.ApiaryId;
         }
     }
 }
