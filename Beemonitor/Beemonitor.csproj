@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201709162203123_sensors.Designer.cs">
       <DependentUpon>201709162203123_sensors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709172142023_somethingnew.cs" />
+    <Compile Include="Migrations\201709172142023_somethingnew.Designer.cs">
+      <DependentUpon>201709172142023_somethingnew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apiary.cs" />
@@ -362,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709162203123_sensors.resx">
       <DependentUpon>201709162203123_sensors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709172142023_somethingnew.resx">
+      <DependentUpon>201709172142023_somethingnew.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

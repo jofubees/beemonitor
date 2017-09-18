@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using Beemonitor.Models;
 using Beemonitor.ViewModels;
 
@@ -95,11 +96,26 @@ namespace Beemonitor.Controllers
             {
                 return RedirectToAction("Index", "Beehives");   //if no parameter provided, return to index
             }
-            var beehive = _context.Beehives.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
-            if (beehive == null)
-                return HttpNotFound();
+//            var beehive = _context.Beehives.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
+  //          if (beehive == null)
+    //            return HttpNotFound();
+
             //var viewModel = new BeehiveDetailsViewModel(beehive);    //create the viewmodel object for the found apiary object
-            var viewModel = _context.Beehives;
+            //var viewModel = _context.Beehives;
+ 
+            var viewModel = new BeehiveDataViewModel();
+
+/*            viewModel.Beehive
+                          = _context.Beehives
+                       .Include("Sensors").Include("Sensors.Observations");
+*/
+
+ //           viewModel.Beehive = _context.Beehives.Include(s => s.Sensors.Observations).ToList();
+
+            /*   the contuso way of doing things - error is converting dbcontext.beehive to beehive
+            viewModel.Beehive = _context.Beehives
+                .Include(i => i.Sensors.Select(c => c.Observations));
+            */
 
             return View(viewModel);
         }

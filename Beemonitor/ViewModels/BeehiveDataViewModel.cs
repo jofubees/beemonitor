@@ -8,15 +8,21 @@ namespace Beemonitor.ViewModels
 {
     public class BeehiveDataViewModel
     {
-        public Beehive Beehive { get; set; }
-        public ICollection<Sensor> Sensors { get; set;}
-        public ICollection<Observation> Observations { get; set; }
+//        Sites[0].Sensors[0].Observations[0]
 
-        public BeehiveDataViewModel(Beehive beehive)
-        {
-            Beehive = beehive;
+            public Beehive Beehive { get; set; }
+            public IEnumerable<Sensor> Sensors { get; set;}
+            public IEnumerable<Observation> Observations { get; set; }
 
-        }
+        //        public BeehiveDataViewModel()
+        //      {
+        //        
+        //  }
+
+        //        public BeehiveDataViewModel(Beehive beehive)
+        //      {
+        //        Beehive = beehive;
+        //  }
 
     }
 }
