@@ -97,18 +97,19 @@ namespace Beemonitor.Controllers
                 return RedirectToAction("Index", "Beehives");   //if no parameter provided, return to index
             }
 //            var beehive = _context.Beehives.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
-  //          if (beehive == null)
-    //            return HttpNotFound();
+//            if (beehive == null)
+//                return HttpNotFound();
 
             //var viewModel = new BeehiveDetailsViewModel(beehive);    //create the viewmodel object for the found apiary object
             //var viewModel = _context.Beehives;
  
-            var viewModel = new BeehiveDataViewModel();
+ //           var viewModel = new BeehiveDataViewModel();
+            var Beehive = _context.Beehives.Include("Sensors").ToList().FirstOrDefault(p => p.Id == id);
 
-/*            viewModel.Beehive
-                          = _context.Beehives
-                       .Include("Sensors").Include("Sensors.Observations");
-*/
+            // viewModel.Beehive = _context.Beehives.Include(Sensors).ToList();
+
+
+            // viewModel.Sensors = beehive.Sensors;
 
  //           viewModel.Beehive = _context.Beehives.Include(s => s.Sensors.Observations).ToList();
 
@@ -117,7 +118,7 @@ namespace Beemonitor.Controllers
                 .Include(i => i.Sensors.Select(c => c.Observations));
             */
 
-            return View(viewModel);
+            return View(Beehive);
         }
     }
 }

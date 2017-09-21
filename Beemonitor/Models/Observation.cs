@@ -11,5 +11,7 @@ namespace Beemonitor.Models
         public string SensorName { get; set; }
         public float ObsValue { get; set; }
         public DateTime ObsDateTime { get; set; }
+
+        public virtual Sensor Sensor { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using Beemonitor.Models;
+
 namespace Beemonitor.Migrations
 {
     using System;
@@ -19,12 +21,14 @@ namespace Beemonitor.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
+            context.SensorTypes.AddOrUpdate(
+                p => p.SensorTypeId,
+                new SensorType {SensorTypeId = 1, TypeDescription = "Hive Temperature"}
+                , new SensorType {SensorTypeId = 2, TypeDescription = "Hive Mass"}
+                , new SensorType {SensorTypeId = 3, TypeDescription = "Battery Level"}
+                , new SensorType {SensorTypeId = 4, TypeDescription = "Ambient Temperature"}
+            );
+
             //
         }
     }

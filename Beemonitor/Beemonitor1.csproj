@@ -51,6 +51,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -187,59 +188,16 @@
     <Compile Include="Controllers\BeehivesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Dtos\ApiaryBeehivesDto.cs" />
     <Compile Include="Dtos\NewApiaryBeehiveDto.cs" />
     <Compile Include="Dtos\ObservationDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709081338233_InitialModel.cs" />
-    <Compile Include="Migrations\201709081338233_InitialModel.Designer.cs">
-      <DependentUpon>201709081338233_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709081351103_addPostcodeToCustomer.cs" />
-    <Compile Include="Migrations\201709081351103_addPostcodeToCustomer.Designer.cs">
-      <DependentUpon>201709081351103_addPostcodeToCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709081358428_AddBeehive.cs" />
-    <Compile Include="Migrations\201709081358428_AddBeehive.Designer.cs">
-      <DependentUpon>201709081358428_AddBeehive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709081411492_PopulateApiaryBeehives1.cs" />
-    <Compile Include="Migrations\201709081411492_PopulateApiaryBeehives1.Designer.cs">
-      <DependentUpon>201709081411492_PopulateApiaryBeehives1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709081521096_ApplyAnnotations.cs" />
-    <Compile Include="Migrations\201709081521096_ApplyAnnotations.Designer.cs">
-      <DependentUpon>201709081521096_ApplyAnnotations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709112227268_observation.cs" />
-    <Compile Include="Migrations\201709112227268_observation.Designer.cs">
-      <DependentUpon>201709112227268_observation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709141005072_apihive.cs" />
-    <Compile Include="Migrations\201709141005072_apihive.Designer.cs">
-      <DependentUpon>201709141005072_apihive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709151736188_linkasvirtual.cs" />
-    <Compile Include="Migrations\201709151736188_linkasvirtual.Designer.cs">
-      <DependentUpon>201709151736188_linkasvirtual.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709161948119_linkasvirtual1.cs" />
-    <Compile Include="Migrations\201709161948119_linkasvirtual1.Designer.cs">
-      <DependentUpon>201709161948119_linkasvirtual1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709161950340_linkasid.cs" />
-    <Compile Include="Migrations\201709161950340_linkasid.Designer.cs">
-      <DependentUpon>201709161950340_linkasid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709162203123_sensors.cs" />
-    <Compile Include="Migrations\201709162203123_sensors.Designer.cs">
-      <DependentUpon>201709162203123_sensors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709172142023_somethingnew.cs" />
-    <Compile Include="Migrations\201709172142023_somethingnew.Designer.cs">
-      <DependentUpon>201709172142023_somethingnew.cs</DependentUpon>
+    <Compile Include="Migrations\201709202236136_InititalCreate.cs" />
+    <Compile Include="Migrations\201709202236136_InititalCreate.Designer.cs">
+      <DependentUpon>201709202236136_InititalCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -256,8 +214,13 @@
     <Compile Include="ViewModels\ApiaryFormViewModel.cs" />
     <Compile Include="ViewModels\BeehiveDataViewModel.cs" />
     <Compile Include="ViewModels\BeehiveFormViewModel.cs" />
+    <Compile Include="ViewModels\SensorIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Beemonitor.mdf" />
+    <Content Include="App_Data\Beemonitor_log.ldf">
+      <DependentUpon>Beemonitor.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -320,9 +283,9 @@
     <Content Include="Views\Beehives\BeehiveForm.cshtml" />
     <Content Include="Views\Beehives\Index.cshtml" />
     <Content Include="Views\Beehives\Details.cshtml" />
+    <Content Include="Views\Sensors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Apiary\" />
   </ItemGroup>
   <ItemGroup>
@@ -334,41 +297,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709081338233_InitialModel.resx">
-      <DependentUpon>201709081338233_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709081351103_addPostcodeToCustomer.resx">
-      <DependentUpon>201709081351103_addPostcodeToCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709081358428_AddBeehive.resx">
-      <DependentUpon>201709081358428_AddBeehive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709081411492_PopulateApiaryBeehives1.resx">
-      <DependentUpon>201709081411492_PopulateApiaryBeehives1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709081521096_ApplyAnnotations.resx">
-      <DependentUpon>201709081521096_ApplyAnnotations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709112227268_observation.resx">
-      <DependentUpon>201709112227268_observation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709141005072_apihive.resx">
-      <DependentUpon>201709141005072_apihive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709151736188_linkasvirtual.resx">
-      <DependentUpon>201709151736188_linkasvirtual.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709161948119_linkasvirtual1.resx">
-      <DependentUpon>201709161948119_linkasvirtual1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709161950340_linkasid.resx">
-      <DependentUpon>201709161950340_linkasid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709162203123_sensors.resx">
-      <DependentUpon>201709162203123_sensors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709172142023_somethingnew.resx">
-      <DependentUpon>201709172142023_somethingnew.cs</DependentUpon>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709202236136_InititalCreate.resx">
+      <DependentUpon>201709202236136_InititalCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
