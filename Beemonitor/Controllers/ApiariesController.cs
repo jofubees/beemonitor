@@ -43,12 +43,12 @@ namespace Beemonitor.Controllers
                 var viewModel = new ApiaryFormViewModel(apiary);  //creating an apiaryformviewModel object using apiary parameter
                 return View("ApiaryForm", viewModel);
             }
-            if (apiary.Id == 0)
+            if (apiary.ApiaryId == 0)
                 _context.Apiaries.Add(apiary);
             else
             {
-                var apiaryInDb = _context.Apiaries.Single(c => c.Id == apiary.Id); //retrieve db version of database
-                apiaryInDb.Name = apiary.Name;          // and update the name
+                var apiaryInDb = _context.Apiaries.Single(c => c.ApiaryId == apiary.ApiaryId); //retrieve db version of database
+                apiaryInDb.ApiaryName = apiary.ApiaryName;          // and update the name
                 apiaryInDb.Postcode = apiary.Postcode;  // and postcode  - nb not using tryupdatemodel as a general security risk
             }
             _context.SaveChanges();               //and save updates to database
@@ -63,7 +63,7 @@ namespace Beemonitor.Controllers
 
         public ActionResult Edit(int id)
         {
-            var apiary = _context.Apiaries.SingleOrDefault(c => c.Id == id);  //find the apiary that matches the id parameter
+            var apiary = _context.Apiaries.SingleOrDefault(c => c.ApiaryId == id);  //find the apiary that matches the id parameter
             if (apiary == null) return HttpNotFound();
             // otherwise build the formview (with our current apiary) and call the Apiary form 
             var viewModel = new ApiaryFormViewModel(apiary);
@@ -76,7 +76,7 @@ namespace Beemonitor.Controllers
             {
                 return RedirectToAction("Index", "Apiaries");   //if no parameter provided, return to index
             }
-            var apiary = _context.Apiaries.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
+            var apiary = _context.Apiaries.SingleOrDefault(a => a.ApiaryId == id);  //get the apiary object for the parameter id
             if (apiary == null)
                 return HttpNotFound();
             var viewModel = new ApiaryDetailsViewModel(apiary);    //create the viewmodel object for the found apiary object

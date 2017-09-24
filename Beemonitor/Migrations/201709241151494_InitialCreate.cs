@@ -3,7 +3,7 @@ namespace Beemonitor.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InititalCreate : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -11,48 +11,58 @@ namespace Beemonitor.Migrations
                 "dbo.Apiaries",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
+                        ApiaryId = c.Int(nullable: false, identity: true),
+                        ApiaryName = c.String(nullable: false, maxLength: 255),
                         Postcode = c.String(maxLength: 10),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.ApiaryId);
             
             CreateTable(
                 "dbo.Beehives",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
+                        BeehiveId = c.Int(nullable: false, identity: true),
+                        BeehiveName = c.String(nullable: false, maxLength: 255),
                         ApiaryId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.BeehiveId)
                 .ForeignKey("dbo.Apiaries", t => t.ApiaryId, cascadeDelete: true)
                 .Index(t => t.ApiaryId);
+            
+            CreateTable(
+                "dbo.BeehiveSensors",
+                c => new
+                    {
+                        BeehiveId = c.Int(nullable: false),
+                        SensorName = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => new { t.BeehiveId, t.SensorName })
+                .ForeignKey("dbo.Beehives", t => t.BeehiveId, cascadeDelete: true)
+                .ForeignKey("dbo.Sensors", t => t.SensorName, cascadeDelete: true)
+                .Index(t => t.BeehiveId)
+                .Index(t => t.SensorName);
             
             CreateTable(
                 "dbo.Sensors",
                 c => new
                     {
-                        SensorName = c.String(nullable: false, maxLength: 128),
+                        SensorName = c.String(nullable: false, maxLength: 50),
                         SensorTypeId = c.Int(nullable: false),
-                        BeehiveId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.SensorName)
-                .ForeignKey("dbo.Beehives", t => t.BeehiveId, cascadeDelete: true)
                 .ForeignKey("dbo.SensorTypes", t => t.SensorTypeId, cascadeDelete: true)
-                .Index(t => t.SensorTypeId)
-                .Index(t => t.BeehiveId);
+                .Index(t => t.SensorTypeId);
             
             CreateTable(
                 "dbo.Observations",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        SensorName = c.String(maxLength: 128),
+                        ObservationId = c.Int(nullable: false, identity: true),
+                        SensorName = c.String(maxLength: 50),
                         ObsValue = c.Single(nullable: false),
                         ObsDateTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.ObservationId)
                 .ForeignKey("dbo.Sensors", t => t.SensorName)
                 .Index(t => t.SensorName);
             
@@ -141,10 +151,11 @@ namespace Beemonitor.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Beehives", "ApiaryId", "dbo.Apiaries");
             DropForeignKey("dbo.Sensors", "SensorTypeId", "dbo.SensorTypes");
             DropForeignKey("dbo.Observations", "SensorName", "dbo.Sensors");
-            DropForeignKey("dbo.Sensors", "BeehiveId", "dbo.Beehives");
+            DropForeignKey("dbo.BeehiveSensors", "SensorName", "dbo.Sensors");
+            DropForeignKey("dbo.BeehiveSensors", "BeehiveId", "dbo.Beehives");
+            DropForeignKey("dbo.Beehives", "ApiaryId", "dbo.Apiaries");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -152,8 +163,9 @@ namespace Beemonitor.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Observations", new[] { "SensorName" });
-            DropIndex("dbo.Sensors", new[] { "BeehiveId" });
             DropIndex("dbo.Sensors", new[] { "SensorTypeId" });
+            DropIndex("dbo.BeehiveSensors", new[] { "SensorName" });
+            DropIndex("dbo.BeehiveSensors", new[] { "BeehiveId" });
             DropIndex("dbo.Beehives", new[] { "ApiaryId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
@@ -163,6 +175,7 @@ namespace Beemonitor.Migrations
             DropTable("dbo.SensorTypes");
             DropTable("dbo.Observations");
             DropTable("dbo.Sensors");
+            DropTable("dbo.BeehiveSensors");
             DropTable("dbo.Beehives");
             DropTable("dbo.Apiaries");
         }

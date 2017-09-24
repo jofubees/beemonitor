@@ -40,7 +40,7 @@ namespace Beemonitor.Controllers
             {
                 Id = 0,
                 Name = " ",
-                ApiaryId = apiary.Id
+                ApiaryId = apiary.ApiaryId
             };
 
             return View("BeehiveForm", viewModel);
@@ -48,7 +48,7 @@ namespace Beemonitor.Controllers
 
         public ActionResult Edit(int id)    //parameter is the existing beehive.
         {
-            var beehive = _context.Beehives.SingleOrDefault(c => c.Id == id);  //find the beehive that matches the id parameter
+            var beehive = _context.Beehives.SingleOrDefault(c => c.BeehiveId == id);  //find the beehive that matches the id parameter
             if (beehive == null) return HttpNotFound();
             // otherwise build the formview (with our current beehive) and call the beehive form 
             var viewModel = new BeehiveFormViewModel(beehive);
@@ -65,12 +65,12 @@ namespace Beemonitor.Controllers
                 return View("BeehiveForm", viewModel);
             }
 
-            if (beehive.Id == 0)
+            if (beehive.BeehiveId == 0)
                 _context.Beehives.Add(beehive);
             else
             {
-                var beehiveInDb = _context.Beehives.Single(c => c.Id == beehive.Id); //retrieve db version of database
-                beehiveInDb.Name = beehive.Name;          // and update the name
+                var beehiveInDb = _context.Beehives.Single(c => c.BeehiveId == beehive.BeehiveId); //retrieve db version of database
+                beehiveInDb.BeehiveName = beehive.BeehiveName;          // and update the name
             }
             _context.SaveChanges();               //and save updates to database
 
@@ -82,7 +82,7 @@ namespace Beemonitor.Controllers
             {
                 return RedirectToAction("Index", "Apiaries") ;   //if no parameter provided, return to index
             }
-            var apiary = _context.Apiaries.SingleOrDefault(a => a.Id == id);  //get the apiary object for the parameter id
+            var apiary = _context.Apiaries.SingleOrDefault(a => a.ApiaryId == id);  //get the apiary object for the parameter id
             if (apiary == null)
                 return HttpNotFound();
             var viewModel = new ApiaryDetailsViewModel(apiary);    //create the viewmodel object for the found apiary object
@@ -104,7 +104,7 @@ namespace Beemonitor.Controllers
             //var viewModel = _context.Beehives;
  
  //           var viewModel = new BeehiveDataViewModel();
-            var Beehive = _context.Beehives.Include("Sensors").ToList().FirstOrDefault(p => p.Id == id);
+            var Beehive = _context.Beehives.Include("Sensors").ToList().FirstOrDefault(p => p.BeehiveId == id);
 
             // viewModel.Beehive = _context.Beehives.Include(Sensors).ToList();
 

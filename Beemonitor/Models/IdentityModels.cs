@@ -35,5 +35,12 @@ namespace Beemonitor.Models
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BeehiveSensor>()
+                .HasKey(c => new { c.BeehiveId, c.SensorName });
+            
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

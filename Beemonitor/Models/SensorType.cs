@@ -12,7 +12,6 @@ namespace Beemonitor.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SensorTypeId { get; set; }
-
         public string TypeDescription { get; set; }
 
         public ICollection<Sensor> Sensors { get; set; }

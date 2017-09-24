@@ -28,7 +28,6 @@ namespace Beemonitor.Migrations
                 , new SensorType {SensorTypeId = 3, TypeDescription = "Battery Level"}
                 , new SensorType {SensorTypeId = 4, TypeDescription = "Ambient Temperature"}
             );
-
             //
         }
     }

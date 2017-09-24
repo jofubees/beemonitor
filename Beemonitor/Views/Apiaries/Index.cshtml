@@ -29,9 +29,9 @@ else
         @foreach (var apiary in Model)
         {
             <tr>
-                <td>@Html.ActionLink(apiary.Name, "Index", "Beehives", new {id = apiary.Id}, null)</td>
+                <td>@Html.ActionLink(apiary.ApiaryName, "Index", "Beehives", new {id = apiary.ApiaryId}, null)</td>
                 <td>@apiary.Postcode</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Apiaries", new { id = apiary.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Apiaries", new { id = apiary.ApiaryId }, null)</td>
             </tr>
         }
         </tbody>

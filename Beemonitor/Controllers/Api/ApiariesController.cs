@@ -26,7 +26,7 @@ namespace Beemonitor.Controllers.Api
         //get  /api/observations/1
         public Apiary GetApiary(int id)
         {
-            var apiary = _context.Apiaries.SingleOrDefault(c=> c.Id == id);
+            var apiary = _context.Apiaries.SingleOrDefault(c=> c.ApiaryId == id);
 
             if (apiary == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);

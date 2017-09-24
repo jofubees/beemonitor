@@ -195,14 +195,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709202236136_InititalCreate.cs" />
-    <Compile Include="Migrations\201709202236136_InititalCreate.Designer.cs">
-      <DependentUpon>201709202236136_InititalCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201709241151494_InitialCreate.cs" />
+    <Compile Include="Migrations\201709241151494_InitialCreate.Designer.cs">
+      <DependentUpon>201709241151494_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apiary.cs" />
     <Compile Include="Models\Beehive.cs" />
+    <Compile Include="Models\BeehiveSensor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Observation.cs" />
@@ -217,10 +218,6 @@
     <Compile Include="ViewModels\SensorIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Beemonitor.mdf" />
-    <Content Include="App_Data\Beemonitor_log.ldf">
-      <DependentUpon>Beemonitor.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -286,9 +283,6 @@
     <Content Include="Views\Sensors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Apiary\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -300,8 +294,11 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709202236136_InititalCreate.resx">
-      <DependentUpon>201709202236136_InititalCreate.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709241151494_InitialCreate.resx">
+      <DependentUpon>201709241151494_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

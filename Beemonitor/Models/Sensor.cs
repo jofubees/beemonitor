@@ -9,12 +9,12 @@ namespace Beemonitor.Models
     public class Sensor
     {
         [Key]
+        [StringLength(50, MinimumLength = 3)]
         public string SensorName { get; set; }
         public int SensorTypeId { get; set; }
-        public int BeehiveId { get; set; }
 
-        public virtual Beehive Beehive { get; set; }
-        public virtual SensorType SensorType { get; set; }
-        public virtual ICollection<Observation> Observations { get; set; }
+        public ICollection<BeehiveSensor> BeehiveSensors { get; set; }
+        public ICollection<Observation> Observations { get; set; }
+        public SensorType SensorType { get; set; }
     }
 }

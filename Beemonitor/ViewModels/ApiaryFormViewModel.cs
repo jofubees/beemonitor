@@ -29,8 +29,8 @@ namespace Beemonitor.ViewModels
 
         public ApiaryFormViewModel(Apiary apiary)
         {
-            Id = apiary.Id;
-            Name = apiary.Name;
+            Id = apiary.ApiaryId;
+            Name = apiary.ApiaryName;
             Postcode = apiary.Postcode;
         }
     }

@@ -30,8 +30,8 @@ namespace Beemonitor.ViewModels
 
         public ApiaryDetailsViewModel(Apiary apiary)
         {
-            Id = apiary.Id;
-            Name = apiary.Name;
+            Id = apiary.ApiaryId;
+            Name = apiary.ApiaryName;
             Postcode = apiary.Postcode;
             Beehives = apiary.Beehives;
         }

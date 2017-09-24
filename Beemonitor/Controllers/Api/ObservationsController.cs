@@ -25,7 +25,7 @@ namespace Beemonitor.Controllers.Api
         //get  /api/observations/1
         public Observation GetObservations(int Id)
         {
-            var observation = _context.Observations.SingleOrDefault(c => c.Id == Id);
+            var observation = _context.Observations.SingleOrDefault(c => c.ObservationId == Id);
 
             if (observation == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -43,7 +43,7 @@ namespace Beemonitor.Controllers.Api
             _context.SaveChanges();
 
             // return the uri linking to the created record  i.e. "/api/obs/1"
-            return Created(new Uri(Request.RequestUri + "/" + observation.Id), observation);
+            return Created(new Uri(Request.RequestUri + "/" + observation.ObservationId), observation);
         }
 
 

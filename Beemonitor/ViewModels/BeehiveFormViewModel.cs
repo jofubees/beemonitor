@@ -31,8 +31,8 @@ namespace Beemonitor.ViewModels
 
         public BeehiveFormViewModel(Beehive beehive)
         {
-            Id = beehive.Id;
-            Name = beehive.Name;
+            Id = beehive.BeehiveId;
+            Name = beehive.BeehiveName;
             ApiaryId = beehive.ApiaryId;
         }
     }

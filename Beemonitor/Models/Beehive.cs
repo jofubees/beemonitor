@@ -8,15 +8,13 @@ namespace Beemonitor.Models
 {
     public class Beehive
     {
-        public int Id { get; set; }
+        public int BeehiveId { get; set; }
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
-
+        public string BeehiveName { get; set; }
         public int ApiaryId { get; set; }
 
-        public ICollection<Sensor> Sensors { get; set; }
-
-        //        public virtual Apiary Apiary { get; set; }
+        public ICollection<BeehiveSensor> BeehiveSensors { get; set; }
+        public Apiary Apiary { get; set; }
     }
 }

@@ -6,14 +6,14 @@ using System.Web;
 
 namespace Beemonitor.Models
 {
-    public class Observation
+    public class BeehiveSensor
     {
-        public int ObservationId { get; set; }
+        public int BeehiveId { get; set; }
         [StringLength(50, MinimumLength = 3)]
         public string SensorName { get; set; }
-        public float ObsValue { get; set; }
-        public DateTime ObsDateTime { get; set; }
 
-        public Sensor Sensor { get; set; }
+        public virtual Beehive Beehive { get; set; }
+        public virtual Sensor Sensor { get; set; }
+
     }
 }

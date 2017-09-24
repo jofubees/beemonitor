@@ -25,8 +25,8 @@ else
             @foreach (Beehive beehive in Model.Beehives)
             {
                 <tr>
-                    <td>@Html.ActionLink(beehive.Name, "Details", "Beehives", new {id = beehive.Id}, null)</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Beehives", new { id = beehive.Id }, null)</td>
+                    <td>@Html.ActionLink(beehive.BeehiveName, "Details", "Beehives", new {id = beehive.BeehiveId }, null)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Beehives", new { id = beehive.BeehiveId }, null)</td>
                 </tr>
             }
         </table>
