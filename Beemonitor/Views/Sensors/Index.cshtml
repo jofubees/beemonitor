@@ -1,49 +1,40 @@
-﻿
-@using Beemonitor.Models
-@model IEnumerable<Beemonitor.Models.Sensor>
+﻿@model IEnumerable<Beemonitor.Models.Sensor>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Your Sensors</h2>
+<h2>Index</h2>
 
-<td>@Html.ActionLink("Create New Sensor", "New", "Sensors")</td>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SensorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SensorType.TypeDescription)
+        </th>
+        <th></th>
+    </tr>
 
-
-@if (!Model.Any())
-{
-    <p> you have no Sensors set up</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>SensorName</th>
-                <th>Type</th>
-                <th>Beehive</th>
-                <th>BeehiveName</th>
-                <th>Sensortype</th>
-                <th>Click below to Edit</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var sensor in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(sensor.SensorName, "Index", "Observations", new { id = sensor.SensorName }, null)</td>
-                    <td>@sensor.SensorTypeId</td>
-                    <td>@sensor.BeehiveId</td>
-                    <td>@sensor.Beehive.Name</td>
-                    <td>@sensor.SensorType.TypeDescription</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Apiaries", new { id = sensor.SensorName }, null)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SensorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SensorType.TypeDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SensorName }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SensorName }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SensorName })
+        </td>
+    </tr>
 }
 
-
+</table>

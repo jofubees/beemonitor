@@ -280,6 +280,10 @@
     <Content Include="Views\Beehives\BeehiveForm.cshtml" />
     <Content Include="Views\Beehives\Index.cshtml" />
     <Content Include="Views\Beehives\Details.cshtml" />
+    <Content Include="Views\Sensors\Create.cshtml" />
+    <Content Include="Views\Sensors\Delete.cshtml" />
+    <Content Include="Views\Sensors\Details.cshtml" />
+    <Content Include="Views\Sensors\Edit.cshtml" />
     <Content Include="Views\Sensors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
