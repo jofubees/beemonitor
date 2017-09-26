@@ -21,7 +21,32 @@ namespace Beemonitor.Controllers
             return View(sensors.ToList());
         }
 
-        // GET: Sensors/Details/5
+        // GET: Sensors/WhereUsed/testsensor
+        public ActionResult WhereUsed(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Sensor sensor = db.Sensors
+                .Include(s => s.BeehiveSensors.Select(bs => bs.Beehive))
+                .ToList().FirstOrDefault(p => p.SensorName == id); 
+                
+//                .Include("BeehiveSensor")
+  //              .ToList().FirstOrDefault(p => p.SensorName == id);
+
+
+//                .Include(p => p.PostAuthor.Select(pa => pa.Author).Select(a => a.Interests))
+            if (sensor == null)
+            {
+                return HttpNotFound();
+            }
+
+            sensor = db.Sensors.Include("BeehiveSensors").ToList().FirstOrDefault(p => p.SensorName == id);
+            return View(sensor);
+        }
+
+// GET: Sensors/details/testsensor   - provides a simple list of observations for sensor.
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -33,6 +58,8 @@ namespace Beemonitor.Controllers
             {
                 return HttpNotFound();
             }
+
+            sensor = db.Sensors.Include("Observations").ToList().FirstOrDefault(p => p.SensorName == id);
             return View(sensor);
         }
 
@@ -61,7 +88,7 @@ namespace Beemonitor.Controllers
             return View(sensor);
         }
 
-        // GET: Sensors/Edit/5
+        // GET: Sensors/Edit/testsensor
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -78,7 +105,7 @@ namespace Beemonitor.Controllers
             return View(sensor);
         }
 
-        // POST: Sensors/Edit/5
+        // POST: Sensors/Edit/testsensor
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,7 +122,7 @@ namespace Beemonitor.Controllers
             return View(sensor);
         }
 
-        // GET: Sensors/Delete/5
+        // GET: Sensors/Delete/testsensor
         public ActionResult Delete(string id)
         {
             if (id == null)

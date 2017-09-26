@@ -292,6 +292,7 @@
     <Content Include="Views\Sensors\Details.cshtml" />
     <Content Include="Views\Sensors\Edit.cshtml" />
     <Content Include="Views\Sensors\Index.cshtml" />
+    <Content Include="Views\Sensors\WhereUsed.cshtml" />
     <None Include="Web.Staging.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

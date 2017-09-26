@@ -24,6 +24,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.ActionLink(item.SensorName, "Details", "Sensors", new { id = item.SensorName }, null)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.SensorName)
         </td>
         <td>
@@ -31,7 +34,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SensorName }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SensorName }) |
+            @Html.ActionLink("Where used", "WhereUsed", new { id=item.SensorName }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.SensorName })
         </td>
     </tr>

@@ -1,0 +1,36 @@
+﻿@using Beemonitor.Models
+@model Beemonitor.Models.Sensor
+
+@{
+    ViewBag.Title = "WhereUsed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Where Sensor Used</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.SensorName) </h4>
+    <hr />
+
+</div>
+<div>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Beehive Name</th>
+            <th>Beehive Id</th>
+        </tr>
+
+        @foreach (BeehiveSensor bsBeehiveSensor in Model.BeehiveSensors)
+        {
+            <tr>
+                <td>@Html.ActionLink(bsBeehiveSensor.Beehive.BeehiveName, "Details", "Beehives", new {id = bsBeehiveSensor.BeehiveId }, null)</td>
+                <td>@bsBeehiveSensor.BeehiveId</td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<p>
+    @Html.ActionLink("Back to Sensor List", "Index")
+</p>

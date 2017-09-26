@@ -1,27 +1,39 @@
-﻿@model Beemonitor.Models.Sensor
+﻿@using Beemonitor.Models
+@model Beemonitor.Models.Sensor
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@Model.SensorName</h2>
 
-<div>
-    <h4>Sensor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SensorType.TypeDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SensorType.TypeDescription)
-        </dd>
-
-    </dl>
-</div>
+@if (Model.Observations == null)
+{
+    <p> this Sensor has no observations so far</p>
+}
+else
+{
+    <div>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Date Time</th>
+                <th>Value</th>
+                <th>Id</th>
+                <th>SensorName</th>
+            </tr>
+            @foreach (Observation obs in Model.Observations)
+            {
+                <tr>
+                    <td>@obs.ObsDateTime</td>
+                    <td>@obs.ObsValue</td>
+                    <td>@obs.ObservationId</td>
+                    <td>@obs.SensorName</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SensorName }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
