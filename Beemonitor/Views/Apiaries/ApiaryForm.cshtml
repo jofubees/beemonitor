@@ -1,21 +1,21 @@
-﻿@model Beemonitor.ViewModels.ApiaryFormViewModel
+﻿@model Beemonitor.Models.Apiary
 
 
 
 @{
-    ViewBag.Title = @Model.Title;
+    ViewBag.Title = "Amend Create Apiary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Title</h2>
+<h2>Amend Create Apiary</h2>
 
 @using (Html.BeginForm("Save", "Apiaries"))
 {
     @Html.ValidationSummary(true, "please fix the following errors...")
     <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m=>m.Name)
+        @Html.LabelFor(m => m.ApiaryName)
+        @Html.TextBoxFor(m => m.ApiaryName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.ApiaryName)
     </div>
 
     <div class="form-group">
@@ -24,7 +24,7 @@
         @Html.ValidationMessageFor(m => m.Postcode)
     </div>
 
-    @Html.HiddenFor(m=> m.Id)
+    @Html.HiddenFor(m=> m.ApiaryId)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
     

@@ -68,7 +68,8 @@ namespace Beemonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sensor sensor = db.Sensors.Find(id);
+//          Sensor sensor = db.Sensors.Find(id);
+            var sensor = db.Sensors.SingleOrDefault(c => c.SensorName == id);
             if (sensor == null)
             {
                 return HttpNotFound();

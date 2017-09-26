@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using Beemonitor.Models;
 using Beemonitor.ViewModels;
+using Beemonitor.Models;
 
 namespace Beemonitor.Controllers
 {
@@ -36,14 +36,16 @@ namespace Beemonitor.Controllers
 
             Apiary apiary = _context.Apiaries.Find(fred);
 
-            var viewModel = new BeehiveFormViewModel() //creating an fresh BeehiveFormViewModel
+            //            var viewModel = new BeehiveFormViewModel() //creating an fresh BeehiveFormViewModel
+            var beehive = new Beehive()
             {
-                Id = 0,
-                Name = " ",
+                BeehiveId = 0,
+                BeehiveName = "enter beehive name",
                 ApiaryId = apiary.ApiaryId
             };
 
-            return View("BeehiveForm", viewModel);
+            //            return View("BeehiveForm", viewModel);
+            return View("BeehiveForm", beehive);
         }
 
         public ActionResult Edit(int id)    //parameter is the existing beehive.
@@ -51,8 +53,9 @@ namespace Beemonitor.Controllers
             var beehive = _context.Beehives.SingleOrDefault(c => c.BeehiveId == id);  //find the beehive that matches the id parameter
             if (beehive == null) return HttpNotFound();
             // otherwise build the formview (with our current beehive) and call the beehive form 
-            var viewModel = new BeehiveFormViewModel(beehive);
-            return View("BeehiveForm", viewModel);
+//            var viewModel = new BeehiveFormViewModel(beehive);
+//            return View("BeehiveForm", viewModel);
+            return View("BeehiveForm", beehive);
         }
 
         [HttpPost]
@@ -61,8 +64,8 @@ namespace Beemonitor.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new BeehiveFormViewModel(beehive);  //creating an BeehiveformviewModel object using beehive parameter
-                return View("BeehiveForm", viewModel);
+//                var viewModel = new BeehiveFormViewModel(beehive);  //creating an BeehiveformviewModel object using beehive parameter
+                return View("BeehiveForm", beehive);
             }
 
             if (beehive.BeehiveId == 0)
@@ -74,7 +77,7 @@ namespace Beemonitor.Controllers
             }
             _context.SaveChanges();               //and save updates to database
 
-            return RedirectToAction("Index", "Beehives");   //and return to the index list of apiaries
+            return RedirectToAction("Index", "Beehives", beehive.ApiaryId);   //and return to the index list of apiaries
         }
         public ActionResult Index(int? id)
         {
@@ -104,7 +107,7 @@ namespace Beemonitor.Controllers
             //var viewModel = _context.Beehives;
  
  //           var viewModel = new BeehiveDataViewModel();
-            var Beehive = _context.Beehives.Include("Sensors").ToList().FirstOrDefault(p => p.BeehiveId == id);
+            var Beehive = _context.Beehives.Include("BeehiveSensors").ToList().FirstOrDefault(p => p.BeehiveId == id);
 
             // viewModel.Beehive = _context.Beehives.Include(Sensors).ToList();
 

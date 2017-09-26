@@ -1,21 +1,21 @@
-﻿@model Beemonitor.ViewModels.BeehiveFormViewModel
-
+﻿@using Beemonitor.Models
+@model Beemonitor.Models.Beehive
 
 
 @{
-    ViewBag.Title = @Model.Title;
+    ViewBag.Title = "Amend Create Beehive";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Title  beehive </h2>
+<h2>Amend/Create Beehive </h2>
 
 @using (Html.BeginForm("Save", "Beehives"))
 {
     @Html.ValidationSummary(true, "please fix the following errors...")
     <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Name)
+        @Html.LabelFor(m => m.BeehiveName)
+        @Html.TextBoxFor(m => m.BeehiveName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BeehiveName)
     </div>
     <div>
         @Html.TextAreaFor(m=> m.ApiaryId)

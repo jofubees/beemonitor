@@ -4,26 +4,24 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@foreach(var beehive in Model)
-{ 
-//    <h2>@Model.name</h2>
+<h2>@Model.BeehiveName</h2>
 
-    if (Model.Beehive.Sensors == null)
+    @if (Model.Beehive.BeehiveSensors == null)
     {
         <p> this Beehive has no sensors set up</p>
     }
     else
     {
         <div>
-            <table  class="table table-bordered table-hover">
-                @foreach (Sensor sensor in Model.Sensors)
+            <table class="table table-bordered table-hover">
+                @foreach (BeehiveSensor sensor in Model.BeehiveSensors)
                 {
                     <tr>
                         <th>Sensor Name</th>
                         <th>@sensor.SensorName</th>
                     </tr>
-                }
+        }
             </table>
+
         </div>
     }
-}

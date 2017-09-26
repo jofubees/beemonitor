@@ -27,11 +27,21 @@ namespace Beemonitor.Controllers
 
         public ActionResult New()
         {
-            var viewModel = new ApiaryFormViewModel() //creating an empty ApiaryFormViewModel
+            //            var viewModel = new ApiaryFormViewModel() //creating an empty ApiaryFormViewModel
+            Apiary apiary = new Apiary()
             {
-                Id = 0
+                ApiaryId = 0
             };
-            return View("ApiaryForm", viewModel);
+            return View("ApiaryForm", apiary);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var apiary = _context.Apiaries.SingleOrDefault(c => c.ApiaryId == id);  //find the apiary that matches the id parameter
+            if (apiary == null) return HttpNotFound();
+            // otherwise build the formview (with our current apiary) and call the Apiary form 
+//            var viewModel = new ApiaryFormViewModel(apiary);
+            return View("ApiaryForm", apiary);
         }
 
         [HttpPost]
@@ -40,8 +50,8 @@ namespace Beemonitor.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new ApiaryFormViewModel(apiary);  //creating an apiaryformviewModel object using apiary parameter
-                return View("ApiaryForm", viewModel);
+//                var viewModel = new ApiaryFormViewModel(apiary);  //creating an apiaryformviewModel object using apiary parameter
+                return View("ApiaryForm", apiary);
             }
             if (apiary.ApiaryId == 0)
                 _context.Apiaries.Add(apiary);
@@ -59,15 +69,6 @@ namespace Beemonitor.Controllers
         {
             var apiaries = _context.Apiaries;             // set up to retrieve all apiaries in database
             return View(apiaries);                        // and pass that list of apiaries to the view
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var apiary = _context.Apiaries.SingleOrDefault(c => c.ApiaryId == id);  //find the apiary that matches the id parameter
-            if (apiary == null) return HttpNotFound();
-            // otherwise build the formview (with our current apiary) and call the Apiary form 
-            var viewModel = new ApiaryFormViewModel(apiary);
-            return View("ApiaryForm", viewModel);
         }
 
         public ActionResult Details(int? id)
